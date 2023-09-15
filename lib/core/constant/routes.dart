@@ -13,16 +13,11 @@ class AppRoute {
   static const String ficheProduit = "/FicheProduit";
   static const String detailsProduit = "/DetailsProduit";
 
-  static const String listDossier = "/ListDossier";
-  static const String ficheDossier = "/FicheDossier";
-
   static const String listFactures = "/ListFacture";
   static const String ficheFacture = "/FicheFactures";
 
   static const String listDonnee = "/ListDonnee";
   static const String ficheDonnee = "/FicheDonnee";
-
-  static const String ficheServerName = "/FicheServerName";
 
   static const String connectDossier = "/ConnectDossier";
 }

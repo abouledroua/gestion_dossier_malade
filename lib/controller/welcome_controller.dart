@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../core/constant/data.dart';
 import '../core/constant/routes.dart';
 import '../core/constant/sizes.dart';
 
@@ -15,11 +14,7 @@ class WelcomeController extends GetxController {
   }
 
   close() {
-    // if (AppData.getServerName().isEmpty) {
-    //   Get.offAllNamed(AppRoute.ficheServerName);
-    // } else {
-    //   Get.offAllNamed(AppRoute.listDossier);
-    // }
+    Get.offAllNamed(AppRoute.login);
   }
 
   @override

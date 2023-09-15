@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:gestion_dossier_malade/core/constant/data.dart';
+
+import 'data.dart';
 
 class AppSizes {
   static double maxWidth = 800;

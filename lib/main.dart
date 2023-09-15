@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
     String? fontFamily = GoogleFonts.abhayaLibre().fontFamily;
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Gestion Commercial',
+        title: 'Gestion Dossier Malade',
         routes: routes,
         home: const WelcomePage(),
         theme: ThemeData(

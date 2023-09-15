@@ -18,7 +18,7 @@ import 'package:http/http.dart' as http;
 // import '../services/settingservice.dart';
 import 'color.dart';
 // import 'image_asset.dart';
-import 'routes.dart';
+// import 'routes.dart';
 import 'sizes.dart';
 // import 'sizes.dart';
 
@@ -30,11 +30,9 @@ class AppData {
 
   static const String _www = "WWW", numProduit = '5G';
   static late String storageLocation;
-  static String dossier = "",
-      miniDossier = "",
-      _serverName = "",
+  static String _serverName = "",
       _serverIP = "$_serverName/COMMERCIAL",
-      privacyAppName = 'Gestion Commercial';
+      privacyAppName = 'Gestion Dossier Malade';
 
   static double webVersion = 3.4, padBottom = 30;
   static const int widthSmallImage = 100, heightSmallImage = 100;
@@ -864,11 +862,10 @@ class AppData {
             btnCancelOnPress: () {},
             onDismissCallback: (type) {},
             btnOkOnPress: () {
-              Get.offAllNamed(AppRoute.listDossier);
+              // Get.offAllNamed(AppRoute.listDossier);
             },
             showCloseIcon: true,
-            desc:
-                "Voulez-vous vraiment changer le dossier en cours '$dossier'??")
+            desc: "Voulez-vous vraiment changer le dossier en cours??")
         .show();
   }
 

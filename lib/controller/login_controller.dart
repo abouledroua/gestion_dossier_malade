@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
 
 import '../core/class/user.dart';
 import '../core/constant/color.dart';
@@ -53,69 +53,69 @@ class LoginController extends GetxController {
     update();
   }
 
-  onValidateOld() {
-    setValider(true);
-    debugPrint("valider=$valider");
-    String serverDir = AppData.getServerDirectory();
-    var url = "$serverDir/EXIST_USER.php";
-    debugPrint("url=$url");
-    String userName = AppData.removeEspace(userController.text.toUpperCase());
-    String password = AppData.removeEspace(passController.text.toUpperCase());
-    Uri myUri = Uri.parse(url);
-    http
-        .post(myUri, body: {"USERNAME": userName, "PASSWORD": password})
-        .timeout(AppData.getTimeOut())
-        .then((response) async {
-          if (response.statusCode == 200) {
-            debugPrint("responsebody=${response.body}");
-            debugPrint("response=${response.toString()}");
-            erreurServeur = false;
-            wrongCredent = false;
-            erreur = "";
-            var responsebody = jsonDecode(response.body);
-            User.idUser = 0;
-            for (var m in responsebody) {
-              createVarUser(
-                  idUser: AppData.getInt(m, 'ID_USER'),
-                  achat: AppData.getInt(m, 'ACHAT') == 1,
-                  vente: AppData.getInt(m, 'VENTE') == 1,
-                  tresorerie: AppData.getInt(m, 'TRESORERIE_STATISTIQUE') == 1,
-                  reglement: AppData.getInt(m, 'REGLEMENT') == 1,
-                  prixAchat: AppData.getInt(m, 'PRIX_ACHAT') == 1,
-                  parametre: AppData.getInt(m, 'PARAM') == 1,
-                  password: password,
-                  userName: userName);
-            }
-            if (User.idUser == 0) {
-              effacerLastUser();
-              String msg = "Nom d' 'utilisateur ou mot de passe invalide !!!";
-              wrongCredent = true;
-              debugPrint(msg);
-              setValider(false);
-              AppData.mySnackBar(
-                  title: 'Login', message: msg, color: AppColor.red);
-            }
-            setValider(false);
-          } else {
-            erreur = " seurveur 1";
-            erreurServeur = true;
-            AppData.mySnackBar(
-                title: 'Login',
-                message: "Probleme lors de la connexion avec le serveur !!!",
-                color: AppColor.red);
-            debugPrint("Probleme lors de la connexion avec le serveur !!!");
-            setValider(false);
-          }
-        })
-        .catchError((error) {
-          erreur = error.toString();
-          erreurServeur = true;
-          debugPrint("erreur onValidate: $error");
-          debugPrint("Probleme de Connexion avec le serveur 33 !!!");
-          setValider(false);
-          debugPrint("error : ${error.toString()}");
-        });
-  }
+  // onValidateOld() {
+  //   setValider(true);
+  //   debugPrint("valider=$valider");
+  //   String serverDir = AppData.getServerDirectory();
+  //   var url = "$serverDir/EXIST_USER.php";
+  //   debugPrint("url=$url");
+  //   String userName = AppData.removeEspace(userController.text.toUpperCase());
+  //   String password = AppData.removeEspace(passController.text.toUpperCase());
+  //   Uri myUri = Uri.parse(url);
+  //   http
+  //       .post(myUri, body: {"USERNAME": userName, "PASSWORD": password})
+  //       .timeout(AppData.getTimeOut())
+  //       .then((response) async {
+  //         if (response.statusCode == 200) {
+  //           debugPrint("responsebody=${response.body}");
+  //           debugPrint("response=${response.toString()}");
+  //           erreurServeur = false;
+  //           wrongCredent = false;
+  //           erreur = "";
+  //           var responsebody = jsonDecode(response.body);
+  //           User.idUser = 0;
+  //           for (var m in responsebody) {
+  //             createVarUser(
+  //                 idUser: AppData.getInt(m, 'ID_USER'),
+  //                 achat: AppData.getInt(m, 'ACHAT') == 1,
+  //                 vente: AppData.getInt(m, 'VENTE') == 1,
+  //                 tresorerie: AppData.getInt(m, 'TRESORERIE_STATISTIQUE') == 1,
+  //                 reglement: AppData.getInt(m, 'REGLEMENT') == 1,
+  //                 prixAchat: AppData.getInt(m, 'PRIX_ACHAT') == 1,
+  //                 parametre: AppData.getInt(m, 'PARAM') == 1,
+  //                 password: password,
+  //                 userName: userName);
+  //           }
+  //           if (User.idUser == 0) {
+  //             effacerLastUser();
+  //             String msg = "Nom d' 'utilisateur ou mot de passe invalide !!!";
+  //             wrongCredent = true;
+  //             debugPrint(msg);
+  //             setValider(false);
+  //             AppData.mySnackBar(
+  //                 title: 'Login', message: msg, color: AppColor.red);
+  //           }
+  //           setValider(false);
+  //         } else {
+  //           erreur = " seurveur 1";
+  //           erreurServeur = true;
+  //           AppData.mySnackBar(
+  //               title: 'Login',
+  //               message: "Probleme lors de la connexion avec le serveur !!!",
+  //               color: AppColor.red);
+  //           debugPrint("Probleme lors de la connexion avec le serveur !!!");
+  //           setValider(false);
+  //         }
+  //       })
+  //       .catchError((error) {
+  //         erreur = error.toString();
+  //         erreurServeur = true;
+  //         debugPrint("erreur onValidate: $error");
+  //         debugPrint("Probleme de Connexion avec le serveur 33 !!!");
+  //         setValider(false);
+  //         debugPrint("error : ${error.toString()}");
+  //       });
+  // }
 
   onValidate() {
     setValider(true);
@@ -126,10 +126,19 @@ class LoginController extends GetxController {
     if (userName.isNotEmpty) {
       switch (userName) {
         case 'rec':
+          createVarUser(
+              idUser: 1, type: 1, password: password, userName: userName);
+          Get.offAllNamed(AppRoute.homePageRecep);
           break;
         case 'patient':
+          createVarUser(
+              idUser: 2, type: 2, password: password, userName: userName);
+          // Get.offAllNamed(AppRoute.homePage);
           break;
         case 'labo':
+          createVarUser(
+              idUser: 3, type: 3, password: password, userName: userName);
+          // Get.offAllNamed(AppRoute.homePage);
           break;
         default:
           effacerLastUser();
@@ -140,77 +149,25 @@ class LoginController extends GetxController {
           AppData.mySnackBar(title: 'Login', message: msg, color: AppColor.red);
           break;
       }
+    } else {
+      effacerLastUser();
+      String msg = "Nom d' 'utilisateur ou mot de passe invalide !!!";
+      wrongCredent = true;
+      debugPrint(msg);
+      setValider(false);
+      AppData.mySnackBar(title: 'Login', message: msg, color: AppColor.red);
     }
-    String serverDir = AppData.getServerDirectory();
-    var url = "$serverDir/EXIST_USER.php";
-    debugPrint("url=$url");
-    Uri myUri = Uri.parse(url);
-    http
-        .post(myUri, body: {"USERNAME": userName, "PASSWORD": password})
-        .timeout(AppData.getTimeOut())
-        .then((response) async {
-          if (response.statusCode == 200) {
-            debugPrint("responsebody=${response.body}");
-            debugPrint("response=${response.toString()}");
-            erreurServeur = false;
-            wrongCredent = false;
-            erreur = "";
-            var responsebody = jsonDecode(response.body);
-            User.idUser = 0;
-            for (var m in responsebody) {
-              createVarUser(
-                  idUser: AppData.getInt(m, 'ID_USER'),
-                  achat: AppData.getInt(m, 'ACHAT') == 1,
-                  vente: AppData.getInt(m, 'VENTE') == 1,
-                  tresorerie: AppData.getInt(m, 'TRESORERIE_STATISTIQUE') == 1,
-                  reglement: AppData.getInt(m, 'REGLEMENT') == 1,
-                  prixAchat: AppData.getInt(m, 'PRIX_ACHAT') == 1,
-                  parametre: AppData.getInt(m, 'PARAM') == 1,
-                  password: password,
-                  userName: userName);
-            }
-            if (User.idUser == 0) {}
-            setValider(false);
-          } else {
-            erreur = " seurveur 1";
-            erreurServeur = true;
-            AppData.mySnackBar(
-                title: 'Login',
-                message: "Probleme lors de la connexion avec le serveur !!!",
-                color: AppColor.red);
-            debugPrint("Probleme lors de la connexion avec le serveur !!!");
-            setValider(false);
-          }
-        })
-        .catchError((error) {
-          erreur = error.toString();
-          erreurServeur = true;
-          debugPrint("erreur onValidate: $error");
-          debugPrint("Probleme de Connexion avec le serveur 33 !!!");
-          setValider(false);
-          debugPrint("error : ${error.toString()}");
-        });
   }
 
   createVarUser(
       {required int idUser,
       required String userName,
       required String password,
-      required bool achat,
-      required reglement,
-      required tresorerie,
-      required prixAchat,
-      required parametre,
-      required vente}) async {
+      required int type}) async {
     User.idUser = idUser;
     User.username = userName;
     User.password = password;
-    User.achat = achat;
-    User.reglement = reglement;
-    User.tresorerie = tresorerie;
-    User.prixAchat = prixAchat;
-    User.parametre = parametre;
-    User.vente = vente;
+    User.type = type;
 
     debugPrint("Its Ok ----- Connected ----------------");
 
@@ -226,7 +183,6 @@ class LoginController extends GetxController {
       debugPrint("Going to Privacy");
       await Get.toNamed(AppRoute.privacy);
     }
-    Get.offAllNamed(AppRoute.homePage);
   }
 
   @override

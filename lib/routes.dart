@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'core/constant/routes.dart';
-import 'view/screens/homepage.dart';
+import 'view/screens/homepagerecep.dart';
 import 'view/screens/login.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
   AppRoute.login: (context) => const LoginPage(),
-  AppRoute.homePage: (context) => const HomePage(),
+  AppRoute.homePageRecep: (context) => const HomePageRecep(),
   // AppRoute.privacy: (context) => const PrivacyPolicy(),
   // AppRoute.apropos: (context) => const AProposView(),
   // AppRoute.activation: (context) => const FicheActivation(),

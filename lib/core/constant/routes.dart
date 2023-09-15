@@ -1,7 +1,7 @@
 class AppRoute {
   static const String login = "/Login";
   static const String privacy = "/Privacy";
-  static const String homePage = "/HomePage";
+  static const String homePageRecep = "/HomePage";
   static const String activation = "/Activation";
   static const String apropos = "/Apropos";
 

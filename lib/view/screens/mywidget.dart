@@ -44,10 +44,13 @@ class MyWidget extends StatelessWidget {
         child: Stack(children: [
       if (backgroudImage != null && kIsWeb)
         Positioned.fill(
-            child: Opacity(
-                opacity: .2,
-                child: Image(
-                    image: AssetImage(backgroudImage!), fit: BoxFit.fill))),
+            child: Padding(
+                padding: const EdgeInsets.all(28.0),
+                child: Opacity(
+                    opacity: .2,
+                    child: Image(
+                        image: AssetImage(backgroudImage!),
+                        fit: BoxFit.fill)))),
       Container(
           alignment: Alignment.topCenter,
           child: Container(

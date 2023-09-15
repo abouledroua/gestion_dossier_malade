@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/constant/color.dart';
-import '../../core/constant/data.dart';
 import '../../core/constant/sizes.dart';
 
 class MyWidget extends StatelessWidget {

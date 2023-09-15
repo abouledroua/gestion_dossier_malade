@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constant/color.dart';
-import '../../../core/constant/image_asset.dart';
 import '../../../core/constant/sizes.dart';
 
 class ImageHeaderLogin extends StatelessWidget {
-  const ImageHeaderLogin({
-    super.key,
-  });
+  final String image;
+  const ImageHeaderLogin({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -21,5 +19,5 @@ class ImageHeaderLogin extends StatelessWidget {
                 BoxShadow(color: AppColor.greyFonce, blurRadius: 18),
                 BoxShadow(color: AppColor.white, blurRadius: 28)
               ]),
-              child: Image.asset(AppImageAsset.login))));
+              child: Image.asset(image))));
 }

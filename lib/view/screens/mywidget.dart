@@ -1,9 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/constant/color.dart';
+import '../../core/constant/data.dart';
 import '../../core/constant/sizes.dart';
 
 class MyWidget extends StatelessWidget {
@@ -41,19 +43,21 @@ class MyWidget extends StatelessWidget {
     showDemo ??= true;
     return SafeArea(
         child: Stack(children: [
-      if (backgroudImage != null)
+      if (backgroudImage != null && kIsWeb)
         Positioned.fill(
-            child: Image(image: AssetImage(backgroudImage!), fit: BoxFit.fill)),
+            child: Opacity(
+                opacity: .2,
+                child: Image(
+                    image: AssetImage(backgroudImage!), fit: BoxFit.fill))),
       Container(
           alignment: Alignment.topCenter,
           child: Container(
               constraints: BoxConstraints(maxWidth: AppSizes.maxWidth),
               child: Scaffold(
                   key: key,
-                  backgroundColor: backgroundColor ??
-                      (backgroudImage != null
-                          ? Colors.transparent
-                          : AppColor.white),
+                  backgroundColor: (backgroudImage != null && kIsWeb
+                      ? Colors.transparent
+                      : backgroundColor ?? AppColor.white),
                   appBar: title!.isEmpty
                       ? null
                       : AppBar(
@@ -87,16 +91,17 @@ class MyWidget extends StatelessWidget {
                   resizeToAvoidBottomInset: true,
                   body: Container(
                       decoration: BoxDecoration(
-                          gradient: backgroundColor != null
-                              ? null
-                              : LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                      Colors.grey.shade400,
-                                      Colors.grey.shade300,
-                                      Colors.grey.shade200
-                                    ])),
+                          gradient:
+                              backgroundColor != null || backgroudImage != null
+                                  ? null
+                                  : LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                          Colors.grey.shade400,
+                                          Colors.grey.shade300,
+                                          Colors.grey.shade200
+                                        ])),
                       child: child))))
     ]));
   }
